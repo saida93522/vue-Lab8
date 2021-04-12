@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task List</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h1>Vue Loops</h1>
+        <label for="listOfTask">Please enter your todo task: </label>
+        <input id="listOfTask" v-model="newTask">
+        <button v-on:click="addTask">Add Task</button>
+
+
+        <h2> Your Task List</h2>
+        <ul>
+            <!-- List rendering based on an array. -->
+            <li v-for="task in taskList">{{ task }}</li>
+            <!-- task is an alias for the array element being iterated on, taskList is the source data array -->
+        </ul>
+    </div>
+
+
+    <!-- Vue JS Script -->
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    taskList: [],
+                    newTask: ''
+                }
+            },
+            methods: {
+                addTask() {
+                    if (this.newTask) {
+                        this.taskList.push(this.newTask) //push input value to newTask list
+                        this.newTask = ''
+                    }
+                }
+            }
+
+        })
+        app.mount('#app')
+    </script>
+</body>
+
+</html>

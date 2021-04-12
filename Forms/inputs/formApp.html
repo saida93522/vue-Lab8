@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forms and Inputs</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<!-- -->
+
+<body>
+    <div id="app">
+        <h1>Hello Vue</h1>
+        <label for="name">Please Enter your name: </label>
+        <input v-model="name" id="name">
+        <!-- the v-model tells Vue to create a two-way data binding between a value in template and a value in data properties. -->
+
+        <!--This block will only be rendered if the directive’s expression returns a truthy value.-->
+        <div v-if="name">
+            <p> Your name is {{ name }}</p>
+            <button v-on:click="clear">Clear Input</button>
+        </div>
+        <!-- else block for v-if directive -->
+        <div v-else>
+            <p> Awaiting user input.</p>
+        </div>
+    </div>
+
+
+    <!-- JS script -->
+    <script>
+        const app = Vue.createApp({ // Vue instance creates a copy of the DOM and updates when data changes
+            data() {
+                return {
+                    name: ''
+                }
+            },
+            methods: {
+                clear() {
+                    this.name = ''
+                }
+            }
+        })
+        app.mount('#app')
+    </script>
+
+</body>
+
+</html>

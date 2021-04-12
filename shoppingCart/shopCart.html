@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shooping Cart</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <style>
+        td,
+        th {
+            width: 25%;
+            text-align: center;
+        }
+
+        .errorMsg {
+            color: #ff0000;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <h1>Example Shopping Cart</h1>
+        <!-- table -->
+        <table>
+            <tr>
+                <th>Item</th>
+                <th>Unit Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+            <tr>
+                <td>{{ name }}</td>
+                <td>${{ unitPrice }}</td>
+                <td>
+                    <input type="number" id="quantity" v-model.number="quantity">
+                    <div class="errorMsg" v-if="quantityError">{{ quantityError }}</div>
+                </td>
+                <td>
+                    <!-- display only if quantity is a number and between 0-20 -->
+                    <div v-if="quantityError">
+                        Invalid Quantity
+                    </div>
+                    <div v-else>
+                        ${{ total }}
+                    </div>
+                </td>
+            </tr>
+
+            </tr>
+        </table>
+    </div>
+
+
+    <!-- JS Script -->
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    name: 'Hat',
+                    quantity: 0,
+                    unitPrice: 4.99,
+                    maxQuantity: 20,
+                    quantityError: ''
+
+                }
+            },
+            computed: { // If the data changes, the computed property is recalculated
+                total() {
+                    // Validate if quantity is a number
+                    if (isNaN(this.quantity)) {
+                        this.quantityError = 'Quantity must be a number'
+                    }
+                    // Validate if quantity is positive and less  than maxQuantity
+                    else if (this.quantity < 0 || this.quantity > this.maxQuantity) {
+                        this.quantityError = 'Quantity must be between 0 and 20'
+                    }
+                    //If Valid
+                    else {
+                        this.quantityError = '' //falsy
+
+                        //Calc Total
+                        let totalNum = this.unitPrice * this.quantity;
+                        return totalNum.toFixed(2); //returns totak price rounded two decimal place
+                    }
+
+                }
+            }
+
+        })
+        app.mount('#app')
+    </script>
+
+</body>
+
+</html>

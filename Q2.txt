@@ -1,0 +1,9 @@
+" Property ... was accessed during render but is not defined on instance."
+Q: What does this Vue warning message mean? Can you safely ignore it? What causes it, and how do you fix it?  Write an answer in your own words. 
+
+
+A: This error indicates that you are referencing a variable in your template that is NOT defined in your Vue data.
+You should not disregard it; instead, ensure that this variable is reactive in the data option by initializing the variable
+or check your spelling if you’ve already defined it .
+
+

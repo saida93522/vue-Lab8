@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello Vue</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h1>Hello Vue</h1>
+
+        <!--view, bind data-->
+        <p>{{ mesgWithExclamationPoints }}</p>
+        <!-- Vue Events -->
+        <button v-on:click="addExclamation">Add !</button>
+        <button v-on:click="clearExclamations">Clear Exclamation points</button>
+
+    </div>
+
+    <!-- vue App JS -->
+    <script>
+        let app = Vue.createApp({ //ViewModel that connects view(html) and model (data/js/object)
+            data() { // funtion that returns objects
+                return {
+                    message: 'hi',
+                    numExclamationPoint: 0
+                }
+            },
+
+            // method attribute that contains list of function definitions
+            methods: {
+                addExclamation() {
+                    if (this.numExclamationPoint < 10) {
+                        // this.message = this.message + '!'   //this refrence object cunstructor,vue instance
+                        this.numExclamationPoint++;
+                    } else {
+                        alert('No more Exclamation points!!!')
+                    }
+                },
+                clearExclamations() {
+                    // this.message = 'hi';
+                    this.numExclamationPoint = 0
+
+                }
+            },
+            computed: { // will re-evaluate when some of its reactive sources have changed.
+                mesgWithExclamationPoints() {
+                    let msgWithPoints = this.message;
+                    for (let i = 0; i < this.numExclamationPoint; i++) {
+                        msgWithPoints = msgWithPoints + '!'
+                    }
+                    return msgWithPoints
+
+                }
+
+            }
+        })
+        app.mount('#app')
+
+    </script>
+
+</body>
+
+</html>
